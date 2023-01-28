@@ -1,0 +1,10 @@
+.navigation{
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+
+.navigation>div{
+    width: 50%;
+}
