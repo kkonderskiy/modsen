@@ -9,8 +9,8 @@ function BookInfo(props) {
             <div className="book_content">
 
                 <div><img src={props.check.volumeInfo.imageLinks.thumbnail} alt="" /></div>
-                <h2>{ props.check.volumeInfo.categories !== undefined ? props.check.volumeInfo.categories[0] : "Нет категории" }</h2>
-                <p>{ props.check.volumeInfo.title !== undefined ? props.check.volumeInfo.title : "Нет названия" }</p>
+                <h2>{ props.check.volumeInfo.title !== undefined ? props.check.volumeInfo.title : "Нет названия" }</h2>
+                <p>{ props.check.volumeInfo.categories !== undefined ? props.check.volumeInfo.categories[0] : "Нет категории" }</p>
                 <span>{ props.check.volumeInfo.authors[0] !== undefined ? props.check.volumeInfo.authors.join(", ") : "Нет автора" }</span>
 
             </div>

@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import Navigations from "./components/navigations/Navigations.jsx";
-import BookInfo from "./components/Book_section/BookInfo.jsx";
 import BookContainer from "./components/Book_section/BookContainer.jsx";
 
 //import "./styles/App.css";
 
 function App() {
+  const [bookData, setBookData] = useState([]);
+
+  function testCallBack(test) {
+    setBookData(test);
+    console.log(bookData);
+  }
+
   return (
     <div className="App">
-      <Navigations value={"test"} />
+      <Navigations test1={testCallBack} />
       <h2>Количество</h2>
       <BookContainer />
     </div>
