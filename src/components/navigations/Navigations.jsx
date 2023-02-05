@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import "./style.css"
 
-function getInf(serch, categories, sorting) {
-    let str = serch.replaceAll(" ", "") + "&orderBy=" + sorting;
-
-}
-
 function Navigations(testCallBack) {
     const [request, getReqest] = useState("");
     const [categorie, getCategorie] = useState("all");

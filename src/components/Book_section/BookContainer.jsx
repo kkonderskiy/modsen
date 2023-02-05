@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import BookInfo from "./BookInfo";
 import "./style.css"
 
