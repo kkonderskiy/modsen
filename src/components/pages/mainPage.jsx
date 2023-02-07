@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navigations from "../navigations/Navigations.jsx";
 import BookContainer from "../Book_section/BookContainer.jsx";
 import searchBookData from "../../API/Search.js";
+
 import Loader from "../UI/loader.jsx";
 //import "./styles/App.css";
 
@@ -62,7 +63,7 @@ function MainPage() {
       {bookData.length === 0 ? (
         " "
       ) : (
-        <input type="button" value="click" onClick={paginations} />
+        <input type="button" value="Load more" onClick={paginations} />
       )}
     </div>
   );

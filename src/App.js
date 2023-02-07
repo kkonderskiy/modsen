@@ -1,15 +1,15 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import MainPage from "./components/pages/mainPage.jsx";
+import { Route, Routes } from "react-router-dom";
+import MainPage from "./components/pages/MainPage.jsx";
+import BookPage from "./components/pages/BookPage.jsx";
 //import "./styles/App.css";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<MainPage />}></Route>
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<MainPage />}></Route>
+      <Route path="/book_list/*" element={<BookPage />}></Route>
+    </Routes>
   );
 }
 
