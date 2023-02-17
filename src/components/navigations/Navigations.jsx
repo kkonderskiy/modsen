@@ -1,7 +1,12 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { fetchBooks } from "../../store/Search.js";
+import { Outlet } from "react-router-dom";
 import "./style.css"
 
-function Navigations(testCallBack) {
+function Navigations() {
+    const dispatch = useDispatch();
+
     const [request, getReqest] = useState("");
     const [categorie, getCategorie] = useState("all");
     const [sorting, getSorting] = useState("relevance");
@@ -9,10 +14,13 @@ function Navigations(testCallBack) {
     function createReqest(event){
         event.preventDefault();
 
-        testCallBack.test1(request, categorie, sorting);
+        dispatch(fetchBooks({request:request, categorie:categorie, sorting:sorting, index: 0, pagination: false,
+            bookList: []}))
+
     }
 
     return(
+        <>
         <nav className="navigation">
             <h1> Search for books</h1>
             <form onSubmit={createReqest} id="form1">
@@ -48,6 +56,8 @@ function Navigations(testCallBack) {
 
             </form>
         </nav>
+        <Outlet/>
+        </>
     )
 }
 

@@ -1,57 +1,26 @@
-import React, { useState } from "react";
 import Navigations from "../navigations/Navigations.jsx";
 import BookContainer from "../Book_section/BookContainer.jsx";
-import searchBookData from "../../API/Search.js";
-
+import { useDispatch, useSelector } from "react-redux";
+import { fetchBooks } from "../../store/Search.js";
+import "./mainPageStyle.css"
 import Loader from "../UI/loader.jsx";
 
 
 function MainPage() {
-  const [bookData, setBookData] = useState([]);
-  const [requestData, setRequestData] = useState([]);
-  const [index, setIndex] = useState(20);
-  const [bookDataLoading, setbookDataLoading] = useState(false);
-
-  async function testCallBack(request, categorie, sorting) {
-    setbookDataLoading(true);
-    if (categorie === "all") {
-      categorie = "";
-    } else {
-      categorie = "+subject:" + categorie;
-    }
-    setRequestData([request, categorie, sorting]);
-
-    const response = await searchBookData(
-      request,
-      categorie,
-      sorting,
-      0,
-      false,
-      bookData
-    );
-    console.log("Test", response);
-    setBookData(response[0]);
-    setIndex(20);
-    setbookDataLoading(false);
-  }
+  const dispatch = useDispatch();
+  const requestData = useSelector(state => state.books.requestData);
+  const index = useSelector(state => state.books.indexPage);
+  const bookData = useSelector(state => state.books.bookList);
+  const loading = useSelector(state => state.books.loader);
 
   async function paginations() {
-    setbookDataLoading(true);
-    console.log(0, index);
-    const response = await searchBookData(
-      ...requestData,
-      index,
-      true,
-      bookData
-    );
-    setBookData(response[0]);
-    setIndex(response[1] + 20);
-    setbookDataLoading(false);
+    dispatch(fetchBooks({request:requestData.request, categorie:requestData.categorie, sorting:requestData.sorting, index: index, pagination: true,
+      bookList: bookData}));
   }
 
   return (
     <div className="App">
-      <Navigations test1={testCallBack} />
+
       <h2>
         Количество{" "}
         {bookData.totalItems !== undefined ? bookData.totalItems : ""}
@@ -59,11 +28,11 @@ function MainPage() {
       <BookContainer
         request={bookData.items !== undefined ? bookData.items : []}
       />
-      {bookDataLoading ? <Loader /> : ""}
+      {loading ? <Loader /> : ""}
       {bookData.length === 0 ? (
         " "
       ) : (
-        <input type="button" value="Load more" onClick={paginations} />
+        <input className="input_pagination" type="button" value="Load more" onClick={paginations} />
       )}
     </div>
   );
