@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchBooks } from "./Search";
+import { fetchBooks } from "../helpers/Search";
 const bookListSlice = createSlice({
   name: "list",
   initialState: {
@@ -17,7 +17,6 @@ const bookListSlice = createSlice({
       state.indexPage = action.payload.indexBook;
       state.bookList = action.payload.bookList;
       state.requestData = action.payload.get;
-      console.log(state.bookList);
       state.loader = false;
     },
     [fetchBooks.rejected]: (state, action) => {

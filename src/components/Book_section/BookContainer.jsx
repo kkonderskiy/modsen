@@ -5,15 +5,12 @@ import "./style.css"
 
 
 
-function BookContainer(props) {
-    console.log(props);
-
+function BookContainer({request}) {
     return(
        <div className="container">
-            {props.request.map(data =><BookInfo check={data} key={data.etag}/>)}
+            {request.map(data =><BookInfo check={data} key={data.etag}/>)}
         </div> 
     );
-    
 }
 
 export default BookContainer;

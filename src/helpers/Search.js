@@ -10,11 +10,11 @@ export const fetchBooks = createAsyncThunk(
         arg.categorie = "+subject:" + arg.categorie;
       }
 
-      let url = `https://www.googleapis.com/books/v1/volumes?q=intitle:${arg.request
+      const url = `https://www.googleapis.com/books/v1/volumes?q=intitle:${arg.request
         .split(" ")
         .join("+")}${arg.categorie}&orderBy=${
         arg.sorting
-      }&maxResults=20&startIndex=${
+      }&maxResults=30&startIndex=${
         arg.index
       }&key=AIzaSyBmhrqwDDNQgZ2i4LaRnQDa4Nz1JDzG_xI`;
       let data = await fetch(url);
@@ -23,7 +23,7 @@ export const fetchBooks = createAsyncThunk(
         alert("Возможно не включен VPN.");
         return {
           bookList: [],
-          indexBook: 20,
+          indexBook: 30,
           get: {
             request: arg.request,
             categorie: arg.categorie,
@@ -31,12 +31,25 @@ export const fetchBooks = createAsyncThunk(
           },
         };
       } else {
+        if (commits.items === undefined && arg.pagination === true) {
+          alert("Невозможно загрузить еще книг: все подходящие кончились!!!");
+          commits = arg.bookList;
+          return {
+            bookList: commits,
+            indexBook: arg.index,
+            get: {
+              request: arg.request,
+              categorie: arg.categorie,
+              sorting: arg.sorting,
+            },
+          };
+        }
         if (arg.pagination === true) {
           commits.items = [...arg.bookList.items, ...commits.items];
 
           return {
             bookList: commits,
-            indexBook: arg.index + 20,
+            indexBook: arg.index + 30,
             get: {
               request: arg.request,
               categorie: arg.categorie,
@@ -46,7 +59,7 @@ export const fetchBooks = createAsyncThunk(
         } else {
           return {
             bookList: commits,
-            indexBook: 20,
+            indexBook: 30,
             get: {
               request: arg.request,
               categorie: arg.categorie,
