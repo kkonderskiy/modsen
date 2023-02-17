@@ -5,12 +5,13 @@ import BookPage from "./components/pages/BookPage.jsx";
 import Navigations from "./components/navigations/Navigations.jsx";
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Navigations />}>
+    <>
+      <Navigations />
+      <Routes>
         <Route path="/" element={<MainPage />}></Route>
         <Route path="/book_list/*" element={<BookPage />}></Route>
-      </Route>
-    </Routes>
+      </Routes>
+    </>
   );
 }
 
