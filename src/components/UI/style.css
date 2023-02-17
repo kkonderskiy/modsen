@@ -4,6 +4,7 @@
     border-radius: 50%;
     border: 3px dashed green;
     animation: load 2s infinite linear;
+    margin: 10px calc(100% / 2 - 20px);
 }
 
 

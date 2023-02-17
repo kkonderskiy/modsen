@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { fetchBooks } from "./Search";
 const bookListSlice = createSlice({
   name: "list",
@@ -12,19 +12,17 @@ const bookListSlice = createSlice({
   extraReducers: {
     [fetchBooks.pending]: (state, action) => {
       state.loader = true;
-      alert("loading");
     },
     [fetchBooks.fulfilled]: (state, action) => {
-      console.log("Itog", action.payload);
       state.indexPage = action.payload.indexBook;
       state.bookList = action.payload.bookList;
       state.requestData = action.payload.get;
       console.log(state.bookList);
       state.loader = false;
-      alert("OK");
     },
     [fetchBooks.rejected]: (state, action) => {
       state.loader = false;
+      alert(action.payload);
       alert("error");
     },
   },
